@@ -367,12 +367,6 @@
             });
         });
 
-        const modeToggle = document.getElementById('mode-toggle');
-        modeToggle.addEventListener('click', () => {
-            document.body.classList.toggle('light-mode');
-            modeToggle.textContent = document.body.classList.contains('light-mode') ? '🌙' : '🌓';
-        });
-
         const observer = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
                 if (entry.isIntersecting) {
