@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dan Blake Morris - Professional CV</title>
+    <link rel="icon" type="image/png" href="android-chrome-192x192.png">
+    <style>
+        :root {
+            --bg-color: #000;
+            --text-color: #fff;
+            --accent-color: #004225;
+            --accent-hover: #00331C;
+            --secondary-bg: #111;
+        }
+
+        .light-mode {
+            --bg-color: #fff;
+            --text-color: #000;
+            --accent-color: #004225;
+            --accent-hover: #00331C;
+            --secondary-bg: #f0f0f0;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .container {
+            max-width: 1190px;
+            margin: 5px auto;
+            padding: 0 20px;
+        }
+        header {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            text-align: center;
+        }
+        nav ul li a {
+          position: relative;
+        }
+        
+        nav ul li a:hover, nav ul li a:focus {
+          color: var(--accent-color);
+          outline: none;
+        }
+        
+        nav ul li a:hover:after, nav ul li a:focus:after {
+          content: '';
+          position: absolute;
+          bottom: -3px;
+          left: 0;
+          width: 100%;
+          height: 2px;
+          background-color: var(--accent-color);
+          transform: scaleX(0);
+          transition: transform 0.3s ease-in-out;
+        }
+        
+        nav ul li a:hover:after, nav ul li a:focus:after {
+          transform: scaleX(1);   
+        }
+        section {
+            padding: 100px 0;
+            border-bottom: 1px solid #333;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s, transform 1s;
+        }
+        .fade-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        h1 {
+            font-family: 'Times New Roman', serif;
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        h2 {
+            font-size: 30px;
+            font-weight: 300;
+            margin-bottom: 30px;
+            color: var(--accent-color);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        p {
+            margin-bottom: 20px;
+            font-size: 16px;
+            
+        }
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: url('background.jpg') no-repeat center center;
+            background-size: cover;
+        }
+        .hero-content {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 40px;
+            border-radius: 5px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--accent-color);
+            color: var(--text-color);
+            text-decoration: none;
+            border-radius: 3px;
+            font-size: 14px;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+        .btn:hover, .btn:focus {
+            background-color: var(--accent-hover);
+            outline: none;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        .experience-item, .education-item {
+            margin-bottom: 30px;
+        }
+        .experience-item h3, .education-item h3 {
+            font-size: 22px;
+            font-weight: 400;
+            margin-bottom: 10px;
+        }
+        .date {
+            font-style: italic;
+            color: #888;
+            font-weight: 300;
+        }
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            background-color: var(--secondary-bg);
+            font-weight: 300;
+        }
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        .skill-item {
+            flex-basis: 48%;
+            margin-bottom: 20px;
+        }
+        .skill-name {
+            margin-bottom: 5px;
+        }
+        .skill-bar {
+            height: 10px;
+            background-color: #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        .skill-level {
+            height: 100%;
+            background-color: var(--accent-color);
+            border-radius: 5px;
+            width: 0;
+            transition: width 1.5s ease-out;
+        }
+        #mode-toggle {
+            display: none;
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 10px;
+            }
+            h1 {
+                font-size: 36px;
+            }
+            h2 {
+                font-size: 24px;
+            }
+            .skill-item {
+                flex-basis: 100%;
+            }
+        }
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+            margin: -5px;
+            background: linear-gradient(45deg, #000000, #ffffff, #808080, #004225);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+        }
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+    </style>
+</head>
+<body>
+    <button id="mode-toggle" aria-label="Toggle dark/light mode">🌓</button>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#skills">Skills</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Dan Blake Morris</h1>
+            <p>NLP & ML Engineer</p>
+            <a href="mailto:danielblakemorris@gmail.com" class="btn" aria-label="Request Copy of Resume">Request Copy of Resume</a>
+        </div>
+    </section>
+
+    <div class="container">
+        <section id="about">
+            <h2>About Me</h2>
+            <p>A leading Natural Language Processing (NLP) Engineer on LinkedIn and proven Data Science and Machine Learning (ML) expert with over 4 years of experience in delivering end-to-end AI model development/training. Passionate about consulting on, researching and developing transformative AI solutions that tackle complex business use cases. Collaborated with high-profile clients and government entities through academic partnerships with Queen's University, DKIT, Lancaster University and Loughborough University, as well as in the commercial sector with Reddit, ISx4 and SVGC Ltd. Spearheaded diverse NLP projects involving heterogeneous textual data, delivering end-to-end bespoke NLP and ML models tailored to a wide range of use cases.</p>
+            <a href="https://www.linkedin.com/in/daniel-blake-morris" target="_blank" rel="noopener noreferrer" aria-label="Visit my LinkedIn">Connect on LinkedIn</a>
+        </section>
+
+        <section id="experience">
+            <h2>Experience</h2>
+            <div class="experience-item">
+                <h3>Language Data Scientist</h3>
+                <p class="date">Sept - Present</p>
+                <p>Reddit</p>
+                <ul>
+                    <li>Developed NLP/ML models improving content moderation and recommendation systems</li>
+                    <li>Collaborated in curating datasets for training Reddit-specific language models, performing fine-tuning and reinforcement learning to teach language models to interact with new information architectures</li>
+                </ul>
+            </div>
+            <div class="experience-item">
+                <h3>Senior NLP Engineer</h3>
+                <p class="date">Jan - July 2024</p>
+                <p>ISx4</p>
+                <ul>
+                    <li>Spearheaded all NLP and ML initiatives across product teams, driven fast strategic prototyping and delivered innovative solutions</li>
+                    <li>Authored and presented Generative AI research papers with Queen's University Belfast and DKIT</li>
+                    <li>Mentored data scientists in NLP and ML end-to-end development</li>
+                </ul>
+            </div>
+            <div class="experience-item">
+                <h3>NLP & ML Scientist/Engineer</h3>
+                <p class="date">Oct 2022 - Jan 2024</p>
+                <p>Loughborough University with SVGC Ltd</p>
+                <ul>
+                    <li>Developed and managed multiple AI-related projects in a Knowledge Transfer Partnership (KTP) in collaboration with SVGC Ltd</li>
+                    <li>Conducted thorough requirements analyses, user experience assessments, presented to stakeholders and researched to inform, develop and train NLP/ML solutions for government clients</li>
+                </ul>
+            </div>
+            <div class="experience-item">
+                <h3>NLP Engineer/Researcher</h3>
+                <p class="date">Oct 2020 - Oct 2022</p>
+                <p>Lancaster University</p>
+                <ul>
+                    <li>Volunteered to contribute to Linguistics research groups, leading end-to-end development of NLU and NLP models for diverse funded projects, from research to evaluation</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="education">
+            <h2>Education</h2>
+            <div class="education-item">
+                <h3>Master's in Computational Linguistics</h3>
+                <p class="date">Graduated 2022</p>
+                <p>Lancaster University</p>
+                <p>Specialisation in: Natural Language Processing, Knowledge Graphs & Ontologies, Discourse Analysis, Corpus Linguistics</p>
+            </div>
+        </section>
+
+        <section id="skills">
+            <h2>Skills</h2>
+            <div class="skills-container">
+                <div class="skill-item">
+                    <div class="skill-name">Machine Learning & Deep Learning</div>
+                    <div class="skill-bar">
+                        <div class="skill-level" style="width: 95%;" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">Natural Language Processing</div>
+                    <div class="skill-bar">
+                        <div class="skill-level" style="width: 95%;" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">Programming Languages (Python, R, Java, HTML)</div>
+                    <div class="skill-bar">
+                        <div class="skill-level" style="width: 95%;" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">RAG</div>
+                    <div class="skill-bar">
+                        <div class="skill-level" style="width: 95%;" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">Custom LLMs & Inference</div>
+                    <div class="skill-bar">
+                        <div class="skill-level" style="width: 95%;" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">Knowledge Bases</div>
+                    <div class="skill-bar">
+                        <div class="skill-level" style="width: 95%;" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">Cloud Computing (AWS, Azure, Vertex)</div>
+                    <div class="skill-bar">
+                        <div class="skill-level" style="width: 95%;" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">Distributed Information Retrieval Systems</div>
+                    <div class="skill-bar">
+                        <div class="skill-level" style="width: 95%;" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>Contact: danielblakemorris@gmail.com | <a href="https://www.linkedin.com/in/daniel-blake-morris" target="_blank" rel="noopener noreferrer" aria-label="Visit my LinkedIn profile">LinkedIn</a></p>
+    </footer>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        });
+
+        document.querySelectorAll('section').forEach((section) => {
+            observer.observe(section);
+        });
+
+        const skillObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.style.width = entry.target.getAttribute('aria-valuenow') + '%';
+                }
+            });
+        });
+
+        document.querySelectorAll('.skill-level').forEach((skill) => {
+            skillObserver.observe(skill);
+        });
+    </script>
+</body>
+</html>
